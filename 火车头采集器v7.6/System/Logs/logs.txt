@@ -1,0 +1,18 @@
+ERROR System.Object [(null)] - UI Exception:
+System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 Lv.TreeList.TreeListItem.GetFullPath(StringBuilder sb)
+   在 Lv.TreeList.TreeListItem.GetFullPath()
+   在 Lv.TreeList.TreeList.ClickItemArea()
+   在 Lv.TreeList.TreeList.OnMouseDown(MouseEventArgs e)
+   在 System.Windows.Forms.Control.WmMouseDown(Message& m, MouseButtons button, Int32 clicks)
+   在 System.Windows.Forms.Control.WndProc(Message& m)
+   在 Lv.TreeList.TreeList.WndProc(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   在 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   在 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+ERROR LocoySpider.Dock_frmGridView [(null)] - Exception:
+System.FormatException: 该字符串未被识别为有效的布尔值。
+   在 System.Boolean.Parse(String value)
+   在 LocoySpider.Dock_frmGridView.O1ll110OOOllllO00O1Ol1lOO0lO(Object OOl0ll, EventArgs O)
+

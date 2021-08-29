@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="GB2312"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+<url>
+ <loc>http://dalu.me</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=1</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=2</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=3</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=4</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=5</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=6</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=7</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=8</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=1</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=2</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=3</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=4</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=5</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=6</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=7</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?flid=8</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?m=new&amp;sort=heat</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/ent_list.html?m=new</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?m=new</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?sort=new</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?sort=heat</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?sort=hot</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://dalu.me/vod_list.html?sort=fav</loc>
+ <priority>0.5</priority>
+ <lastmod>2019-06-14</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+</urlset>

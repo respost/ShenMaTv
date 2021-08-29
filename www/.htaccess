@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^index.html$ index.php
+RewriteRule ^find_list.html$ find_list.php
+RewriteRule ^follow_list.html$ follow_list.php
+RewriteRule ^play/(.*).html$ play.php\?playid=$1
+RewriteRule ^vod_list.html$ vod_list.php
+</IfModule>

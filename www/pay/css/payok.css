@@ -1,0 +1,49 @@
+﻿@CHARSET "UTF-8";html { font-size:62.5%;-webkit-font-smoothing:antialiased;}body { text-align:center;font-family:"黑体","Helvetica Neue",Helvetica,"Microsoft YaHei",Arial,Tahoma,sans-serif;-webkit-user-select:none; -webkit-text-size-adjust:none; font-size:1rem;background:#F5F4F9;}* { margin:0; padding:0;list-style:none;-webkit-tap-highlight-color: rgba(0,0,0,0);}i, em{ font-style:normal; font-weight:normal; }input::-webkit-input-placeholder{color:#CACAD8;}img{width:100%;vertical-align:top;}input,textarea,select,button{-webkit-appearance:none;font-size:1rem;border:0;}input:focus{-webkit-tap-highlight-color:rgba(0,0,0,0);outline:0;}/*按钮样式及点击时的效果*/.btn{display:block !important;position:relative;overflow:hidden;}/*杂项*/.clear-fix{clear:both;}.none{display:none !important;}.hide{visibility:hidden !important;}.col_blue{color:#07981C;}.status_wrap{margin-top:8rem;}
+.icon_success{height:7.2rem;background:url(icon_success.png) 50% 50% no-repeat;background-size:7.2rem 7.2rem;}.icon_err{height:7.2rem;background:url(delete1.png) 50% 50% no-repeat;background-size:7.2rem 7.2rem;}
+.status_wrap .status_txt{font-size:2rem;margin-top:2rem;}
+.ui-btn-weixin {
+	background-color:#44b549;
+	border-color:#44b549;
+	background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0.5,#44b549),to(#44b549));
+	color:white;
+	background-clip:padding-box;
+	margin-bottom:20px
+        width:100%;
+         font-family:"Helvetica Neue",Helvetica,"黑体",Arial,sans-serif;
+
+
+}
+.hi {
+background: #000;
+height: 68px;
+width: 100%;
+}
+
+.sx {
+width: 140px;
+float: left;
+height: 25px;
+color: #fff;
+
+font-size: 18px;
+position:absolute;
+_position:fixed;
+left:-21px;
+top:8px;
+	
+
+}
+.wei {
+width: 100px;
+float: left;
+height: 25px;
+color:#aaaaaa;
+padding-top: 18px;
+font-size: 16px;
+position:absolute;
+_position:fixed;
+left:1%;
+top:3%;
+	
+
+}

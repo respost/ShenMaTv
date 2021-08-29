@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <l name="店铺名" value="" />
+  <l name="域名" value="" />
+  <l name="店铺ID" value="" />
+  <l name="掌柜ID" value="" />
+  <l name="评分" value="" />
+  <l name="公司" value="" />
+  <l name="所在地" value="" />
+  <l name="经营" value="" />
+  <l name="图片" value="图片就是内容" />
+  <l name="商品名" value="" />
+  <l name="价格" value="" />
+  <l name="销量" value="" />
+  <l name="商品ID" value="" />
+  <l name="内容" value="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容" />
+  <l name="logo" value="" />
+  <l name="评论ID" value="" />
+</root>

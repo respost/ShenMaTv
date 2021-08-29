@@ -1,0 +1,10 @@
+.top{position: relative}
+.top img.top_bg{width:100%;position: relative}
+.top .avatar{position: absolute;left:50%;margin-left: -1.1rem;bottom: -1rem}
+.avatar img{width:2.2rem;height: 2.2rem;border-radius: 100%}
+.w{width:74.4%;margin:auto}
+.intro{color:#000000;font-size: 0.65rem;margin:2.75rem 2% 5rem 12.8%}
+.intro li{margin:0 0 0.78rem 0}
+.btn_submit{width:100%;height:1.64rem;line-height: 1.64rem;display: block;background-color:#55B9AD;font-size: 0.65rem;
+           text-align: center;border-radius: 0.3rem;margin:0.8rem auto 3rem;color:#FFF}
+input.phone_input{height: 1.64rem;line-height: 1.64rem;border: 0.065rem solid #55b9ad}

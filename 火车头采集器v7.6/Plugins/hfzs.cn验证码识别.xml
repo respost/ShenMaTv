@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Created by LeWellOCR.vshost.exe! 2011-03-08 16:05:00-->
+<config>
+  <全局>
+    <地址>http://hfzs.cn/include/vdimgck.php</地址>
+    <放大倍数>5</放大倍数>
+    <显示网格>False</显示网格>
+    <白名单字符>ABCDEFGHIJKLMNOPQRSTUVWXYZ</白名单字符>
+    <黑名单字符>
+    </黑名单字符>
+    <中文>False</中文>
+    <高级设置>False</高级设置>
+    <请求地址>
+    </请求地址>
+    <请求来源>
+    </请求来源>
+    <请求前>
+    </请求前>
+    <请求后>
+    </请求后>
+  </全局>
+  <滤镜>
+    <lv.ocr.clearnoise.cnbrightnesscontrast>-3|0</lv.ocr.clearnoise.cnbrightnesscontrast>
+    <lv.ocr.clearnoise.cnnegative>
+    </lv.ocr.clearnoise.cnnegative>
+    <lv.ocr.clearnoise.cnclearborder>1|1|1|1</lv.ocr.clearnoise.cnclearborder>
+  </滤镜>
+</config>

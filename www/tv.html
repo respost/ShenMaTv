@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>视频播放页面</title>
+		<link href="http://imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+		<style type="text/css">
+			.banner{width: 100%;height: 300px;border: 1px solid #ccc;}
+		</style>
+	</head>
+	<body>
+		<div class="banner">
+		<div id="player" style="width:100%;height:100%;"></div>
+		<video width="100%" height="100%" src="" controls="controls" autoplay="true" id="mp4" preload='no' style="display: none;">
+		  <source src="movie.mp4" type="video/mp4">
+		  <source src="movie.ogg" type="video/ogg">
+			您的浏览器不支持视频播放。
+		</video>
+		</div>
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://imgcache.qq.com/open/qcloud/video/vcplayer/TcPlayer-2.2.2.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				var url="https://p.992mi.com/20190518/94/400014/400014.mp4.m3u8";
+				if(url.indexOf("m3u8") != -1){
+					//1.m3u8视频
+					$("#mp4").hide();
+					$("#player").show();
+					//先移除节点
+					//$("#player").remove();
+					//添加节点
+					//$(".banner").append("<div id='player' style='width:100%;height:100%;'></div>");	
+					var player = new TcPlayer('player', {
+						"m3u8": url,
+						"autoplay" : true,   
+						"width" :  '100%',
+						"height" : '100%'})
+				}else{
+					//2.mp4视频
+					$("#player").hide();
+					$("#mp4").show();
+					$("#mp4").attr("src",url);//更新url				
+				}
+			});
+		</script>
+	</body>
+</html>

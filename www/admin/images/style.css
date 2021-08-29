@@ -1,0 +1,221 @@
+@charset "gb2312";
+* {
+    color: #000;
+    font-family: verdana,'simsun';
+    margin: 0px;
+    padding: 0px;
+}
+*:focus {
+    outline: 0;
+}
+a {
+    color: #00C;
+}
+ul li {
+    list-style: none;
+}
+b {
+    font-weight: normal;
+}
+body {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+#header {
+    clear: both;
+    height: 292px;
+    width: 100%;
+    min-width: 740px;
+    background-color: #74a8e7;
+}
+#header a,#header span {
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -ms-user-select: none;
+    -ms-user-drag: none;
+}
+#header input {
+    -webkit-user-drag: none;
+    -ms-user-drag: none;
+}
+.center_wrap {
+    height: 292px;
+    width: 740px;
+    margin: 0 auto;
+    background: #74a8e7 url("../images/404_bg_left.png") 0 40px no-repeat;
+}
+.right_wrap {
+    height: 292px;
+    width: 300px;
+    float: right;
+    position: relative;
+    background: #74a8e7 url("../images/404_bg_right.png") 0 100px no-repeat;
+}
+#errormsg {
+    color: #d9eaff;
+    position: absolute;
+    top: 155px;
+}
+#msg {
+    color: #fff;
+}
+#a4 {
+    height: 65px;
+    position: absolute;
+    top: 192px;
+}
+#a4 * {
+    color: #fff;
+}
+#a3 {
+    height: 30px;
+    width: auto;
+    min-width: 470px;
+    position: absolute;
+    top: 277px;
+    left: 50%;
+    margin-left: -254px;
+    border: 1px solid #d2d3d4;
+    padding: 0;
+}
+#a3:hover {
+    border-color: #adadad;
+}
+#a3 p {
+    margin-bottom: 10px;
+}
+#a5 {
+    height: 35px;
+    width: 189px;
+    position: absolute;
+    top: 184px;
+}
+#showresult {
+    left: 985px;
+    position: absolute;
+    top: 360px;
+    width: 300px;
+}
+#showresult a {
+    color: #669DBA;
+    text-decoration: none;
+}
+h1 {
+    clear: both;
+    display: block;
+    float: left;
+    font-family: 'microsoft yahei','simhei';
+    font-size: 20px;
+    font-weight: normal;
+}
+h1 span {
+    color: #888;
+    font-family: 'simsun';
+    font-size: 12px;
+    font-weight: normal;
+}
+#url {
+    clear: both;
+    color: #888;
+    display: none;
+    float: left;
+    font-family: verdana;
+    font-size: 12px;
+    overflow: hidden;
+    padding: 6px 0 0;
+    white-space: nowrap;
+    width: 660px;
+}
+#refreshbtn,#snapshotUrl {
+    padding-left:10px;
+    padding-right:10px;
+    height: 28px;
+    line-height: 27px;
+    line-height: 30px\9;
+    text-align: center;
+    display: inline-block;
+    color: #3f85db;
+    background-color: #fcfcfc;
+    border: 1px solid #5089df;
+    cursor: pointer;
+    text-decoration: none;
+}
+#refreshbtn {
+    float: left;
+    margin-right: 25px;
+}
+#refreshbtn:hover,#snapshotUrl:hover {
+    background-color: #dfedfd;
+    border-color: #457fd8;
+}
+#refreshbtn:active,#snapshotUrl:active {
+    background-color: #b1cbeb;
+    border-color: #3470cb;
+}
+#searchbtn1,#searchbtn {
+    background: url("../images/button_search.png") left -1px no-repeat;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    font-weight: bold;
+    width: 44px;
+    height: 30px;
+    line-height: 29px;
+    line-height: 32px\9;
+    display: inline-block;
+    padding: 0 0 0 34px;
+    margin-left: -3px;
+    text-decoration: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+#searchbtn:hover {
+    background-position: -81px -1px;
+}
+#searchbtn:active {
+    background-position: -162px -1px;
+}
+.search_u {
+    width: 32px;
+    height: 30px;
+    background: #fff url("../images/logo_u.png") 50% 50% no-repeat;
+    display: inline-block;
+    border-right: 1px solid #d2d3d4;
+    float: left;
+}
+.search_p {
+    width: 32px;
+    height: 30px;
+    background: #fff url("../images/logo_p.png") 50% 50% no-repeat;
+    display: inline-block;
+    border-right: 1px solid #d2d3d4;
+    float: left;
+}
+.search_logo {
+    width: 32px;
+    height: 30px;
+    background: #fff url("../images/logo_sogou.png") 50% 50% no-repeat;
+    display: inline-block;
+    border-right: 1px solid #d2d3d4;
+    float: left;
+}
+#queryword1,#queryword {
+    border: none;
+    color: #000;
+    display: inline-block;
+    height: 30px;
+    width: 395px;
+    float: left;
+    padding: 0 0 0 6px;
+}
+#page {
+    position: absolute;
+    top: 309px;
+    width: 100%;
+}
+iframe {
+    background: #fff;
+}

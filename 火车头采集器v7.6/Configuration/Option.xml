@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Options xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <IsAutoShutdown>false</IsAutoShutdown>
+  <MaxJobNum>2</MaxJobNum>
+  <IsDisposeJobGui>false</IsDisposeJobGui>
+  <IsPlayCompleteSound>false</IsPlayCompleteSound>
+  <HotKey>7798786</HotKey>
+  <DefaultMaxPageNum>0</DefaultMaxPageNum>
+  <TimeOut>30</TimeOut>
+  <IsIgnoreCase>false</IsIgnoreCase>
+  <DealLabelNotNull>true</DealLabelNotNull>
+  <Separete>|||</Separete>
+  <UserAgent>Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)</UserAgent>
+  <IsAutoBackUp>true</IsAutoBackUp>
+  <BackUpDir />
+  <BackUpFrequency>1</BackUpFrequency>
+  <LastBackTime>0001-01-01T12:00:00</LastBackTime>
+  <IsAutoStart>false</IsAutoStart>
+  <IsAutoLogin>true</IsAutoLogin>
+  <IsMinsizeByClose>true</IsMinsizeByClose>
+  <IsInNotifyByMin>true</IsInNotifyByMin>
+  <IsAutoBugReport>false</IsAutoBugReport>
+  <IsPopUpdateMsg>false</IsPopUpdateMsg>
+  <IsRecievLeWellMsg>false</IsRecievLeWellMsg>
+  <SkipWhenCronBlock>false</SkipWhenCronBlock>
+  <ShowJobQueue>true</ShowJobQueue>
+  <ShowRecycleJob>true</ShowRecycleJob>
+  <AutoUpdatePlateformSoftList>false</AutoUpdatePlateformSoftList>
+  <AllJobInOne>false</AllJobInOne>
+  <Language>zh-CN</Language>
+  <OpenRunLog>false</OpenRunLog>
+  <IsShowSelectJob>false</IsShowSelectJob>
+</Options>

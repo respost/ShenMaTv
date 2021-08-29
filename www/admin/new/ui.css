@@ -1,0 +1,134 @@
+@charset "gb2312";
+body {
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-right: 1px;
+	margin-bottom: 0px;
+	width:100%;
+}
+
+table, tr, td {font-family:Verdana,Arial;line-height:130%;font-size:12px;}
+
+th{
+	background:#d3eaef;
+	color: #000000;
+	height:25px;
+	text-align:center;
+}
+
+
+.STYLE1{
+  color: #e1e2e3;
+}
+
+.pageStyle {
+	font-size: 12px;
+	color: #295568;
+}
+
+.inputclass{
+      padding-bottom:0px;
+      border:1px solid #ccc;
+      font-family:"Verdana,Arial";
+      height:20px;
+      background-color:#ECECEC;
+      width:120px;
+}
+.select{
+      padding-bottom:0px;
+      border:1px solid #ccc;
+      font-family:"Verdana,Arial";
+      height:20px;
+      background-color:#ECECEC;
+      width:60px;
+}
+.validatecode{
+	  padding-bottom:0px;
+      border:1px solid #ccc;
+      font-family:"Verdana,Arial";
+      height:23px;
+      background-color:#ECECEC;
+      width:85px;
+}
+.cpnameselect{
+      padding-bottom:0px;
+      border:1px solid #ccc;
+      font-family:"Verdana,Arial";
+      height:20px;
+      background-color:#ECECEC;
+      width:120px;
+}
+.buttonclass{
+	border: #c8c8c8 1px solid;padding:0px 4px;
+	background: url(btnbg_off.gif) #fefefe repeat-x 1px 1px; 
+	font-size:12px;font-family:tahoma;
+	height:24px;color:#001563;
+	
+}
+
+.formtable{
+	margin-left: 1px;
+	margin-top: 1px;
+	margin-right: 0px;
+	margin-bottom: 1px;
+	border-collapse:collapse;
+	margin:0 auto;
+	width:100%;
+}
+.formtable tr td{border:1px #999 solid; padding:3px;}
+.formtable .header{background:#E1E1E1}
+.formtable .header:hover{text-decoration:none}
+.formtable tr{background:#EFEFEF;height:40px}
+.formtable .footer{background:#FFFFFF;height:45px}
+
+.required{
+	  padding-bottom:0px;
+      border:1px solid #ccc;
+      font-family:"Verdana,Arial";
+      height:23px;
+      background-color:#ECECEC;
+      width:150px;
+}
+
+.optionalval{
+	  padding-bottom:0px;
+      border:1px solid #ccc;
+      font-family:"Verdana,Arial";
+      height:23px;
+      background-color:#ECECEC;
+      width:150px;
+}
+
+.subtitle {
+	font-size: 15px;
+	color: #1B7974;
+	font-family: Verdana,Tahoma,Arial,Geogia,???,Sans-serif;
+	font-weight:bold;
+}
+.requiredArea{
+      border:solid 1px #CCC;
+      font-family:"Verdana,Arial";
+      background-color:#ECECEC;
+}
+
+.tdname{
+	width:130px;
+}
+.tdval{
+	background-color:#FFFFFF;
+}
+
+.colfff{
+    color:#FFFFFF;
+    text-decoration: none;
+}
+
+.nonull{
+    color:#FF0000;
+    text-decoration: none;
+}
+
+tr.rowChecked {background-color:#CBDDEE;text-align:center;height:22px;font-size:13px;}
+tr.rowUnchecked {background-color:#F5F5F5;text-align:center;height:22px;font-size:13px}
+tr.datalist {background-color:#F5F5F5;text-align:center;height:22px;font-size:13px}
+tr.datalistOn {background-color:#CBDDEE;text-align:center;height:22px;font-size:13px;cursor:pointer;}

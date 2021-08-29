@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Conn MySql="server=localhost;user id=huochetou; password=huochetou; database=huochetou; pooling=true;charset=utf8;Port=3306;" SqlServer="Provider=SQLOLEDB;Integrated Security=SSPI;Data Source=(local);Initial Catalog=;Connect Timeout=15" MongoDb="mongodb://localhost◆" />
+  <MySql Host="localhost" Port="3306" User="huochetou" Password="huochetou" Encoding="utf8" Database="huochetou" />
+  <SqlServer Host="(local)" ConnetionType="1" User="sa" Password="" Database="" />
+  <MongoDb Host="mongodb://localhost" Data="" mongodPath="" />
+  <DatabaseType>Access</DatabaseType>
+</root>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LoginConfigs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UserName>asdf</UserName>
+  <Password>[mD5]93aa30872e77dbe86bc4a45aefbe044c</Password>
+  <LoginServer>0</LoginServer>
+  <IsAutoLogin>false</IsAutoLogin>
+  <IsOneTimeRestartAutoLogin>false</IsOneTimeRestartAutoLogin>
+  <ProxyType>DefaultIE</ProxyType>
+  <ProxyServer />
+  <ProxyPort />
+  <ProxyUsername />
+  <ProxyPass />
+  <ProxyDomain />
+  <DatLen>0</DatLen>
+  <Language>zh-CN</Language>
+</LoginConfigs>

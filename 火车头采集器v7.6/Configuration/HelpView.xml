@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <!--数据库入库配置管理-->
+  <h url="Module/DatabaseManager.htm#Select">数据库发布模块位于Module目录下，后缀后为dbm。它包含了Access,MySql,SqlServer,Oracle四种数据库入库模块类型。当您选择了不同类型的入库模块，配置部分将会显示对应的配置界面。使用测试入库即可以检测入库的效果</h>
+  <h url="Module/DatabaseManager.htm#Prefix">如果使用的网站系统在安装时可以指定不同的表单前缀，则这里可能需要填写表单前缀。具体请模块模块说明。</h>
+  <!--数据库模块编辑器-->
+  <h url="Module/DatabaseModule.htm">程序会将SQL语句按换行分割成多条语句，每条语句中的所有标签按实际内容进行替换，然后执行SQL语句。MySql,SqlServer支持存储过程。入库时支持插件功能，双击使用说明即可以看到</h>
+  <!--Web发布配置管理-->
+  <h url="Module/WebPostManager.htm#Encoding">如发布模块中没有指定强制编码，则Web发布时必须指定网站编码。</h>
+  <h url="Module/WebPostManager.htm#Globalvar">全局变量可以在发布模块中所有位置使用，方便设置和修改某些参数。</h>
+  <h url="Module/WebPostManager.htm#Webbrowser">打开内置浏览器后，通过登录网站或浏览器已显示登录状态时，请点击获取cookie栏的确定按钮，程序会自动填写User-Agent和COOkie信息。</h>
+  <h url="Module/WebPostManager.htm#PostLogin">使用数据包方式登录不需要打开浏览器，适合一些验证简单的网站使用。如果发布模块中设置了获取验证码，请先获取验证码并填写后再点击登录按钮。如果验证码图片太大，请双击验证码图片，程序会弹出一个新窗口来显示验证码</h>
+  <h url="Module/WebPostManager.htm#GetFidList">如果发布模块中设置了栏目获取，则点击获取列表就可以得到栏目列表。如果出现格式不符的情况，可能是网站没有登录或是栏目获取规则有误。这时，程序会在左侧显示获取列表时返回的HTML源代码，方便用户分析查看。如果用户已知道分类ID号或分类名称，直接填写也可，不需要获取列表。</h>
+  <!--Web发布模块编辑器-->
+  <h url="Module/WebPostModule.htm#GetPost">使用自动提取数据功能，可以很方便的将其它数据包抓取软件获取的POST数据转化成表单键值对，省去手工一个个添加的麻烦。同时配合“提取POST表单数据”功能，可以实现数据的导出导入，对原有的表单进行批量修改</h>
+  <h url="Module/WebPostModule.htm#GetFidList">程序会提取符合条件的栏目信息，可以在发布配置中显示，方便用户选择。该项也可以不填写，在发布配置中直接指定。</h>
+  <h url="Module/WebPostModule.htm#Login">网站登录时，程序会先请求来源页，然后用来源页获取的cookie提交登录网站。如果来原页和某个网页随机值是同一页面，则网页随机值会从这个页面获取。</h>
+  <h url="Module/WebPostModule.htm#FormHash">每次请求都使用第一次获取的随机值方便用户使用一些特殊的变量，如登录后就可以使用的变量。如果该网页随机值是时间，或是其它每次都更改的变量，建议不要选中</h>
+  <h url="Module/WebPostModule.htm#PostData">表单名可以使用网页随机值，表单值可以使用右侧列出的所有的变量。</h>
+  <h url="Module/WebPostModule.htm#Upload">标签名请直接填写标签的名子，如“内容”。如有多个文件上传，表单名中的递增数字会被替换成从起始数字开始的字符。</h>
+  <h url="Module/WebPostModule.htm#CreateData">可以对某些标签进行编码或是其它处理后，再将结果在登录或是内容发布时使用。发布数据构造中，后边的新的引用可以使用前边引用的结果。</h>
+  <h url="Module/WebPostModule.htm#Plugin">通过插件，可以更改发布的一些流程，能处理更复杂的数据提交方式。如果您要指定数据发布时的Content-Type，可以双击"插件设置"四个字，即可以看到更改的选项。</h>
+  <h url="Module/WebPostModule.htm#CopyRight">用户可以将自己开发的模块添加版权说明。添加模块密码。没有输入密码的加密模块，只会以只读方式显示，用户不能修改。</h>
+  <!--Ocr配置-->
+  <h url="Module/OcrModule.htm#White">OCR识别只支持简单的字母，数字，不支持中文识别。如果需要更复杂的验证码识别，请开发插件实现。</h>
+  <!--框架-->
+  <!--计划任务-->
+  <h url="Client/NewJob/Cron.htm">程序底层使用cron表达式实现每间隔，第天，每周，仅一次的效果。如果您对目前提供的运行方式不满意，可以自定义Cron表达式。</h>
+  <!--采集器-->
+  <!--任务编辑-->
+  <h url="Spider/NewJob/Step1.htm#CheckUrl">
+    为了防止重复采集数据，程序可以对已经采集的数据网址库进行对比去重，如果重复则 不采集。采集的网址是保存在单独的一个网址库文件中。每一个任务都有一个对应的网址库，每个网址库可以对应一个或多个任务。新建的任务都会单独设置一个新的网址库，用户如需要使用旧网址库，需要在“文件保存及部分高级设置“中选择网址库。</h>
+  <h url="Spider/NewJob/Step1.htm#HandUrl">
+    对于某些脚本生成的网址，程序无法自动识别出链接地址。用户需要手动指定网址的链接格式，由程序获取匹配的数据并组合成新的网址。在写的匹配规则中，可以设置标签，该标签将被提取并保存到数据库中去。并在采内容时使用标签的数据处理功能进行二次处理。在网址组合部分，可以引用[参数X]和[标签:XX].
+  </h>
+  <h url="Spider/NewJob/Step1.htm#XpathUrl">在Xpath方式获取网址过程中，只能设置 链接的格式且要选择多条匹配的格式。对于获取到的相对网址，程序会自动补全。</h>
+  <h url="Spider/NewJob/Step1.htm#UserAgent">User-Agent是浏览器的标识，某些网站会记录这些信息用来验证用户身份或是调整网页的显示效果。用户如设置了内置浏览器登录，则User-Agent会更改为内容浏览器的标识。用户可以更改该标识为自己需要的User-Agent。
+  </h>
+  <h url="Spider/NewJob/Step1/StartAddress.htm#DengCha">等差数列中，每一项和前一项的差值是相等的。如1，3，5，7.每项差值为2.</h>
+  <h url="Spider/NewJob/Step1/StartAddress.htm#DengBi">等比数列中，从第2项起，每一项与前一项的比都是一个常数，如2,4,,8,16.</h>
+  <h url="Spider/NewJob/Step3.htm#ToOtherExt">其它扩展是指可以将数据发到采集器应用的其它扩展应用中去，通过内存交换数据，由另一个程序来处理数据的保存或发布工作。</h>
+  <h url="Spider/NewJob/Step3.htm#SaveFile">文件保存支持多种方式，其中，word要使用word文件做模板。excel和CSV是以追加的形式将后面的数据添加到记录中去的。</h>
+  <h url="Spider/NewJob/Step3.htm#MultiPost">多网站乱序发布时，每个网站发布的数据都是不一样的，最后的结果相当于站群群发。</h>
+  <!--多页管理-->
+  <h url="Spider/NewJob/Step2/MultiPage.htm">这里列出了除默认页外的所有的多页。当用户在列表中删除某个多页时，该多页所包含的的所有标签也将被删除。多页管理中的使用原网址替换部分，使用的是纯正则的替换方式。</h>
+  <h url="Spider/NewJob/Step4.htm#Thread">在任务运行时，线程赶多，采集越快。但过多的线程会对采集网站或发布网站造成一定的影响，同时本地的数据库保存数据也会受到影响。一般可以根据网络网速调整自己的线程。</h>
+  <h url="Spider/NewJob/Step4.htm#DownMode">使用同步下载文件，是一条记录下载完成后开始下载文件，文件下载后再继续下一条记录的采集。异步下载是文件还没有下载完，另一条记录已经开始抓取并下载文件。</h>
+  <!--任务设置批量复制-->
+  <h url="Spider/NewJob/Step2.htm#LoopRecord">对于设置了该标签内容循环的记录，程序会按添加为新记录和用分隔符相连两种方式进行数据的保存。添加为新记录是针对所有循环项，按包含最多循环项的标签设置记录数，其它的有循环的记录参与循环，没有循环或循环记录不足的记录以空补全。</h>
+  <h url="Spider/NewJob/Step2.htm#PagesJonCode">当设置了标签在分页中匹配，且没有设置循环匹配的两个页面间的内容，会以分页内容连接代码合并。</h>
+  <h url="Spider/NewJob/Step1.htm#ListPages">列表分页支持参数形式的地址组合方式获取，如果选自动识别分页则不必设置地址样式。列表分页是以网址获取的先后次序进行排列的。</h>
+</root>

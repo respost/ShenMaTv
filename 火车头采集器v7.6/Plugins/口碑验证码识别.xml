@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Created by LeWellOCR.vshost.exe! 2011-03-08 16:09:44-->
+<config>
+  <全局>
+    <地址>http://count.koubei.com/showphone/showphone.php?f=jpg&amp;w=95&amp;h=10&amp;bc=253,248,226&amp;fc=50,153,0&amp;fs=18&amp;fn=verdana&amp;phone=MjU2ODg2NzE3%2523SNCATphYQb1jmaA%253D</地址>
+    <放大倍数>5</放大倍数>
+    <显示网格>False</显示网格>
+    <白名单字符>0123456789-</白名单字符>
+    <黑名单字符>
+    </黑名单字符>
+    <中文>False</中文>
+    <高级设置>False</高级设置>
+    <请求地址>
+    </请求地址>
+    <请求来源>
+    </请求来源>
+    <请求前>
+    </请求前>
+    <请求后>
+    </请求后>
+  </全局>
+</config>

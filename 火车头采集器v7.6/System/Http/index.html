@@ -1,0 +1,893 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>采集服务器HTTP远程网页控制</title>
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <style type="text/css">
+caption{font-size:16px; text-align:left; border-left:1px #888 solid;border-right:1px #888 solid;border-top:1px #888 solid;height:28px;padding-top:2px; padding-left:10px; color:#333;background-color:#ccc;}
+table.dataintable {	font-family:Arial, Helvetica, sans-serif;	margin-top:10px;	border-collapse:collapse;	border:1px solid #888;	font-size: 12px; width:100%; margin:0 auto;}
+table.dataintable pre {	width:auto;	margin:0;	padding:0;	border:0;	background-color:transparent;	}
+table.dataintable th {	vertical-align:baseline;	padding:5px 15px 5px 5px;	background-color:#ddd;	border:1px solid #888;	text-align:left;	}
+table.dataintable td {	/*vertical-align:text-top;*/	padding:2px;	background-color:#efefef;	border:1px solid #aaa;	word-break:break-all; overflow:auto; }
+table.dataintable p {margin:0 0 2px 0;}
+table.dataintable p {margin:0 0 2px 0;}
+div#maincontent table.dataintable ul, div#maincontent table.dataintable li {	list-style-type:none;	margin:0;	padding:0;	}
+table.dataintable td em{	color:#0000ff;	font-weight:normal;	}
+table.dataintable .table_value {color:#0F93D2;}
+.no_wrap {white-space:nowrap;}
+.tb{margin-bottom:20px;}
+div#maincontent table.dataintable ul.listintable {	margin:20px;	padding:0;	}
+div#maincontent table.dataintable ul.listintable  li{	list-style-type:disc;	}
+table.dataintable td.html5_new {	background: #EFEFEF url(/i/site_table_bg.gif) top right no-repeat;}
+.grayr { background-color: #C1C1C1; font-family: tahoma,arial,helvetica,sans-serif; font-size: 11px;  padding: 2px;}
+.grayr span.disabled {background-color: #C1C1C1;color: #797979;margin: 2px;padding: 2px 5px;}
+.grayr a {background-color: #C1C1C1;color: #000000; margin: 2px; padding: 2px 5px;text-decoration: none;}
+.grayr span.current {background-color: #FFFFFF;  color: #303030; font-weight: bold;  margin: 2px; padding: 2px 5px;}
+
+a.button  {	background: url("img/bg_button_a.gif") no-repeat scroll right top transparent;color: #444444;display: block;float: left;font: 12px arial,sans-serif;height: 24px;margin-right:2px;padding-right: 18px;text-decoration: none;cursor: pointer;}
+a.button span{background: url("img/bg_button_span.gif") no-repeat scroll 0 0 transparent;display: block;line-height: 14px;padding: 5px 0 5px 18px;}
+.test{display:block;float:left;}
+
+#mubu{background-color: Gray;display:none;z-index:3;position:absolute;left:0px;top:0px;width:100%;height:100%;filter:Alpha(Opacity=30);/* IE */-moz-opacity:0.4;/* Moz + FF */opacity: 0.4;}
+#addRule{float:right;}
+
+.floatdiv{width:400px;height:200px; position:absolute; top:200px;border: 1px solid black; display:none; background:#ddd;z-index:5}
+.floatdiv h4 {background-color:#ccc;	border-bottom:1px solid #888;margin:0 0; text-align:center; font-family:Arial, Helvetica, sans-serif;padding:5px;}
+.floatdiv div {padding:10px;}
+.floatdiv .buttonGroup{margin-top:70px;}
+a.floatsubmit{float:right;margin-right:10px;}
+a.floatcancel{float:right;margin-right:10px;}
+#edit {height:250px;width:800px;padding:0;margin:0;left:0;position: absolute;border:1px;}
+#floatform3 div{padding:0;}
+#floatform3 .buttonGroup {margin-top:5px;}
+</style>
+  <script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="xheditor-1.1.14-zh-cn.min.js"></script>
+	<script type="text/javascript">
+		var screenwidth = screen.width;
+		var left = (screenwidth-400)/2;
+		var urlArr = document.URL.split("?");
+		var api = urlArr[0] + "api?";
+		var args = urlArr[1];
+		//alert(urlArr);
+		//状态，0空闲，1运行，2停止
+		//规则数据
+		var rule_o = request({model:"job" , action:"list"});
+		var rule = new Object();
+		rule.data = rule_o.Data;
+		rule.total = rule_o.Data.length;
+		rule.limit = 15;
+		rule.maxpage = Math.ceil(rule.total/rule.limit);
+		rule.area = "#id1";
+		rule.page = 1;
+		rule.tableId = "rule";
+		rule.html = new Array();
+		
+		//计划任务
+		var schedulerData_o = request({model:"scheduler",action:"list"});//JSON.parse(schedulerData);
+		var scheduler = new Object();
+		scheduler.data = schedulerData_o.Data;
+		scheduler.total = schedulerData_o.Data.length;
+		scheduler.limit = 15;
+		scheduler.maxpage = Math.ceil(scheduler.total/scheduler.limit);
+		scheduler.area = "#id3";
+		scheduler.page = 1;
+		scheduler.tableId = "scheduler";
+		
+		//about
+		var about = request({model:"about"});
+		about.total = about.Data.length;
+		//about.limit = 15;
+		//about.maxpage = Math.ceil(about.total/about.limit);
+		about.area = "#id4";
+		about.page = 1;
+		about.tableId = "about";
+		$(".button").live("mouseover" ,function(){
+			$(this).css("background-position" , "right -24px");
+			$(this).children().css("background-position" , "0 -24px");
+		}).live("mouseout" , function(){
+			$(this).css("background-position" , "right top");
+			$(this).children().css("background-position" , "0 0");
+		});
+		$("td").live("mouseover" ,function(){
+			$(this).siblings("td").css("background-color" , "#bbb");
+			$(this).css("background-color" , "#bbb");
+		}).live("mouseout" , function(){
+			$(this).siblings("td").css("background-color" , "#EFEFEF");
+			$(this).css("background-color" , "#EFEFEF");
+		});
+		//更新数据
+		var lv , editid , jobid , dataid, datafield = [];
+		$("#id2 .dataintable td").live('dblclick' , function(){
+			editid = $(this).prevAll().length;
+			dataid = $(this).siblings(1).html();
+			if(editid == 0){
+				alert("id不可以编辑");
+				return false;
+			}
+			
+			if(typeof(lv) == 'undefined' || lv == "edit"){
+				lv = $(this);
+				$("#edit").val(htmlspecialchars_decode($(this).html()));
+				changeMuBu();
+				$("#floatform3").css("width" , '800px');
+				$("#floatform3").css("height" , '350px');
+				$("#floatform3").css("top" , (gettop()+100)+"px");
+				$("#floatform3").css("left" , left-200+"px");
+				$("#floatform3").show();
+				$("#edit").focus();
+			}
+		});
+		//修改取消
+		$("#floatform3 .floatcancel").live('click',function(){
+			changeMuBu();
+			lv = "edit";
+			$("#floatform3").hide();
+		});
+		//修改确定		
+		$("#floatform3 .floatsubmit").live('click' , function(){
+			var field = datafield[editid];
+			var content = $("#edit").val();
+			//http://127.0.0.1:777/api?model=app&appname=LocoySpider&jobid=97&action=updatedata&labelname=租金&content=1000&dataid=110 
+			var result = request({model:"app" , appname:"LocoySpider" , jobid:jobid , action:"updatedata" , labelname:field ,content:content,dataid:dataid});
+			if(result.Status == 1){
+				lv.html(htmlspecialchars(content));
+				lv = "edit";
+				$("#floatform3").hide();
+				changeMuBu();
+			}else{
+				alert(result.Tips);
+			}
+		});
+		$(".spiderurl,.spidercontent,.outcontent").live('click' , function(){
+			var id = $(this).parent().siblings(0).html();
+			var classname = $(this).attr('class');
+			var check = $(this).attr("checked") == "checked" ? 1 : 0;
+			//http://127.0.0.1:800/api?model=checksteps&jobid=281&spiderurl=1&spidercontent=0&outcontent=1
+			var data = {model:"job",action:"changestatus",jobid:id};
+			switch(true)
+			{
+				case classname=="spiderurl":
+				data.spiderurl=check;
+				break;
+				case classname=="spidercontent":
+				data.spidercontent=check;
+				break;
+				case classname=="outcontent":
+				data.outcontent=check;
+				break;
+			}
+			var result = request(data);
+			if(result.Status==0)
+			{
+				alert(result.Tips);
+			}
+		});
+		
+		$(function(){
+			drawTable(rule);
+			drawSchedulerTable(scheduler);
+			drawAboutTable(about);
+		});
+		
+		function getJobStatus(s){
+			//alert(s);
+			switch(s)
+			{
+				case 0:
+					return "空闲";
+				case 1:
+					return '运行中';
+				case 2:
+					return '暂停';	
+				default :
+					return "未知";
+			}
+		}
+	
+		function drawTable(){
+			var obj = rule;
+			var data = obj.data.slice((obj.page-1)*obj.limit , obj.page*obj.limit);
+			var colspan = obj.page == obj.maxpage ? obj.total % obj.limit +1 : obj.limit +1;
+			//alert(obj.total % obj.limit);
+			if(data.length == 0){
+				
+			}else{
+				//判断是否有html
+				if(typeof(obj.html[obj.page]) == "undefined" || obj.html[obj.page] ==""){
+					var tableArr = new Array();
+					var tablestart = "id ="+obj.tableId+" page = '"+ obj.page+"'";
+					tableArr.push(tableStart(tablestart));
+					tableArr.push("<caption>::: 任务列表 :::</caption> ");
+					tableArr.push("<tr><th width='5%'>ID</th><th>任务名</th><th width='3%'>采网址</th><th width='3%'>采内容</th><th width='3%'>发布</th><th width='5%'>状态</th><th width='5%'>总数</th><th width='5%'>已采</th><th width='5%'>未采</th><th width='5%'>已发</th><th width='5%'>未发</th><th width='120'>操作</th><th width='320'>计划任务/查看数据</th></tr>");
+					for(var i in data){
+						tableArr.push(
+						trStart() + tdStart()+data[i]['JobId']+tdEnd()+ 
+						tdStart() + data[i]['JobName'] + tdEnd() +
+						tdStart() + "<input class='spiderurl' type='checkbox' " + (data[i]['SpiderUrl'] == '1' && "checked='checked'") +"/>" + tdEnd()+
+						tdStart() + "<input class='spidercontent' type='checkbox' " + (data[i]['SpiderContent'] == '1' && "checked='checked'") +"/>" + tdEnd()+
+						tdStart() + "<input class='outcontent' type='checkbox' " + (data[i]['OutContent'] == '1' && "checked='checked'") +"/>" + tdEnd()+
+						tdStart()+getJobStatus(data[i]['JobStatus'])+tdEnd()+"<td></td><td></td><td></td><td></td><td></td>"+ tdStart() + getOperate(data[i]) +tdEnd()+tdStart()+ "<a class='button viewdata'><span>查看数据</span></a><a class='button addScheduler'><span>添加计划任务</span></a><a class='button updateRule'><span>更新</span></a><a class='button deleteRule'><span>删除</span></a>"  + tdEnd() + trEnd());
+					}
+					tableArr.push("<tr><td colspan='14'><a class='button' id='addRule'><span>新建规则</span></a></td></tr>");
+					if(obj.maxpage>1){
+						tableArr.push("<tr><td colspan='14'>" + drawPage(obj.page , obj.maxpage , 10) + "</td></tr>");
+					}
+					tableArr.push(tableEnd());
+					obj.html[obj.page] = tableArr.join("\n");
+				}
+				$(obj.area).html(obj.html[obj.page]);
+				
+				if(obj.maxpage>1){
+					$(obj.area+" .pagenum").die("click").live("click" , function(){
+						//alert($(this).attr("page"));
+						set_page(obj , $(this).attr("page"));
+						return false;
+					});
+				}
+				$(".start").die("click").live("click" , function(){
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					var result = request({model:"job",action:"start",jobid:id});
+					if(result.Status == '1'){
+						parentTd.html(getOperate({JobStatus:"1"}));
+						parentTd.siblings().eq(5).html("运行中");
+						alert("成功了");
+					}else{
+						alert(result.Tips+id);
+						return false;
+					}
+				});
+				
+				$(".pause").die("click").live("click" ,function(){
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					var result = request({model:"job",action:"pause",jobid:id});
+					if(result.Status == '1'){
+						$(this).parent().html(getOperate({JobStatus:"2"}));
+						parentTd.siblings().eq(5).html("暂停");//parentTd.siblings(2).html("");
+						alert("成功了");
+					}else{
+						alert(result.Tips);
+						return false;
+					}
+				});
+				
+				$(".stop").die("click").live("click" , function(){
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					var result = request({model:"job",action:"stop",jobid:id});
+					if(result.Status == '1'){
+						$(this).parent().html(getOperate({JobStatus:"0"}));
+						parentTd.siblings().eq(5).html("空闲");//parentTd.siblings("eq(2)").html("");
+						alert("成功了");
+					}else{
+						alert(result.Tips);
+						return false;
+					}
+				});
+				
+				$(".viewdata").die("click").live("click" , function(){
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					ajaxRequestData(id , parentTd);
+				});
+				
+				$(".updateRule").die("click").live("click" , function(){
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					$("#rulefile").val("");
+					changeMuBu();
+					
+					$("#floatform2").css("top" , (gettop()+200)+"px");
+					$("#floatform2").css("left" , left+"px");
+					$("#floatform2").show();
+
+					$("#rulesubmit").unbind("click").bind("click" , function(){
+						if($("#rulefile").val() == ""){
+							 alert("文件不得为空");
+							 return false;
+						}
+						document.rule.action = api + "model=job&action=update&jobid="+id;
+						document.rule.submit();
+					});
+					$("#rulecancel").unbind("click").bind("click" , function(){
+						$("#floatform2").hide();
+						changeMuBu();
+					});
+				});
+				
+				$("#addRule").die("click").live("click" , function(){
+					$("#group").empty();
+					$("#group").append("<option value=''>不分组</option>");
+					$.get(fixUrl(api+"model=site&action=list&type=json") , {} , function(obj){
+						if(typeof(obj) != "object"){
+							obj = strToObject(obj);
+						}
+						for(var i in obj.Data)
+						{
+							if(obj.Data[i]['ParentId'] == 0){
+								$("#group").append("<option value='"+obj.Data[i]['SiteId']+"'>"+obj.Data[i]['SiteName']+"</option>");
+							}
+						}
+					});
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					$("#rulefile").val("");
+					changeMuBu();
+					
+					$("#floatform2").css("top" , (gettop()+200)+"px");
+					$("#floatform2").css("left" , left+"px");
+					$("#floatform2").show();
+
+					$("#rulesubmit").unbind("click").bind("click" , function(){
+						if($("#rulefile").val() == ""){
+							 alert("文件不得为空");
+							 return false;
+						}
+						document.rule.action = api + "model=job&action=create";
+						document.rule.submit();
+					});
+					$("#rulecancel").unbind("click").bind("click" , function(){
+						$("#floatform2").hide();
+						changeMuBu();
+					});
+				});
+				
+				//删除规则
+				$(".deleteRule").die("click").live("click" , function(){
+					var parentTd = $(this).parent();
+					if(!confirm("确定删除"+parentTd.siblings().eq(1).html()+"吗?")){
+						return false;
+					}
+					var id = parentTd.siblings(0).html();
+					$.get(fixUrl(api+"model=job&action=delete&type=json&jobid="+id) , {} ,function(obj){
+						if(typeof(obj) != "object"){
+							obj = strToObject(obj);
+						}
+						if(checkData(obj)){
+							parentTd.parent().empty();
+							rule.html[rule.page] = $(rule.area).html();
+						}else{
+							return false;	
+						}
+					});
+				});
+				
+				$(".addScheduler").die("click").live("click" , function(){
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					$("#cron").val("");
+					changeMuBu();
+					$("#floatform").css("top" , (gettop()+200)+"px");
+					$("#floatform").css("left" , left+"px");
+					$("#floatform").show();
+					
+					$("#chedulersubmit").unbind("click").bind("click" , function(){
+						var cron = $("#cron").val();
+						if(cron == ""){
+							 alert("不得为空");
+							 return ;
+						}
+						var result = request({model:"scheduler",action:"create",jobid:id,cron:cron} , "POST");
+						if(result.Status == '1'){
+							parentTd.parent().empty();
+						}else{
+							alert(result.Tips);
+							return false;
+						}
+					});
+					$("#chedulercancel").unbind("click").bind("click" , function(){
+						$("#floatform").hide();
+						changeMuBu();
+					});
+				});
+				
+				function checkData(obj , field){
+					if(obj.Status == '0'){
+						alert(obj.Tips);
+						return false;
+					}else if(arguments[1]){
+						return obj[field];
+					}else{
+						return true;
+					}
+				}
+
+				function getCount(id , element){
+					var allcount = checkData(request({model:"data",action:"count",opreator:"0",jobid:id}) , 'Count');
+					element.siblings().eq(3).html(allcount);
+					var yicai = checkData(request({model:"data",action:"count",opreator:"1",jobid:id}) , 'Count');
+					element.siblings().eq(5).html(allcount - yicai);
+					$.get(fixUrl(api + "model=data&action=count&opreator=3&type=json&jobid="+id), {} , function(obj){
+							if(obj.Tips == ""){
+								element.siblings().eq(6).html(obj.Count);
+								element.siblings().eq(7).html(allcount - obj.Count);
+							}else{
+								element.siblings().eq(3).html(obj.Tips);
+							}
+							rule.html[rule.page] = $(rule.area).html();
+						});
+					return yicai;
+				}
+				
+				function ajaxRequestData(id , element){
+					//总数开始
+					var startid = 6;
+					$.get(fixUrl(api + "model=data&action=count&opreator=0&type=json&jobid="+id), {} , function(obj){
+						if(obj.Tips == ""){
+							element.siblings().eq(startid).html(obj.Count);
+							$.get(fixUrl(api + "model=data&action=count&opreator=1&type=json&jobid="+id), {} , function(obj2){
+								if(obj2.Tips == ""){
+									element.siblings().eq(startid+1).html(obj2.Count);
+									element.siblings().eq(startid+2).html(obj.Count - obj2.Count);
+									drawDataTable({page:1,rn:20,jobid:id,maxpage:Math.ceil(obj2.Count/20),area:"#id2",tableId:"data",ruleName:element.siblings().eq(1).html()});
+								}else{
+									element.siblings().eq(startid+1).html(obj2.Tips);
+								}
+							});
+							$.get(fixUrl(api + "model=data&action=count&opreator=3&type=json&jobid="+id), {} , function(obj2){
+								if(obj2.Tips == ""){
+									element.siblings().eq(startid+3).html(obj2.Count);
+									element.siblings().eq(startid+4).html(obj.Count - obj2.Count);
+								}else{
+									element.siblings().eq(startid+3).html(obj2.Tips);
+								}
+							});
+						}else{
+							element.siblings().eq(startid).html(obj.Tips);
+						}
+					});
+				}
+			}
+
+		}
+		
+		function drawDataTable(obj){
+			var pn = obj.page-1;
+			$.get(fixUrl(api + "model=data&action=view&type=json&pn="+pn+"&rn="+obj.rn+"&jobid="+obj.jobid) , {} ,function(result){
+				var tableArr = new Array();
+				var tablestart = "style = 'width:100%'"+" page = '"+ obj.page+"'";
+				tableArr.push(tableStart(tablestart));
+				tableArr.push("<caption>::: "+obj.ruleName+"数据列表 :::</caption>");
+				var thArr = new Array();
+				var first = true;
+				if(result.Data.length > 0){
+					for(var i in result.Data){
+						var tdArr = new Array();
+						if(first){
+							var thlength = 0 ;
+						}
+						for(var j in result.Data[i]){
+							if(first){
+								thArr.push("<th>"+j+"</th>");
+								datafield.push(j);
+								jobid = obj.jobid;
+								thlength++;
+							}
+							tdArr.push("<td>"+htmlspecialchars(result.Data[i][j])+"</td>");
+						}
+						if(first){
+							tableArr.push("<tr>"+ thArr.join("") +"</tr>");
+						}
+						tableArr.push("<tr>"+ tdArr.join("") +"</tr>");
+						if(first){
+							first = false;
+						}
+					}
+				}else{
+					tableArr.push("<tr><td>没有数据</td></tr>");
+				}
+				if(obj.maxpage>1){
+					tableArr.push("<tr><td colspan='"+thlength+"'>" + drawPage(obj.page , obj.maxpage , 10) + "</td></tr>");
+				}
+				tableArr.push("</table>");
+				$(obj.area).html(tableArr.join("\n"));
+				
+				if(obj.maxpage>1){
+					$(obj.area+" .pagenum").die("click").live("click" , function(){
+						set_page(obj , $(this).attr("page"));
+						return false;
+					});
+				}
+			});
+		}
+		
+		function htmlspecialchars (string, quote_style, charset, double_encode) {
+			var optTemp = 0,
+				i = 0,        noquotes = false;
+			if (typeof quote_style === 'undefined' || quote_style === null) {
+				quote_style = 2;
+			}
+			string = string.toString();    if (double_encode !== false) { // Put this first to avoid double-encoding
+				string = string.replace(/&/g, '&amp;');
+			}
+			string = string.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+			 var OPTS = {
+				'ENT_NOQUOTES': 0,
+				'ENT_HTML_QUOTE_SINGLE': 1,
+				'ENT_HTML_QUOTE_DOUBLE': 2,
+				'ENT_COMPAT': 2,        'ENT_QUOTES': 3,
+				'ENT_IGNORE': 4
+			};
+			if (quote_style === 0) {
+				noquotes = true;    }
+			if (typeof quote_style !== 'number') { // Allow for a single string or an array of string flags
+				quote_style = [].concat(quote_style);
+				for (i = 0; i < quote_style.length; i++) {
+					// Resolve string input to bitwise e.g. 'ENT_IGNORE' becomes 4            
+					if (OPTS[quote_style[i]] === 0) {
+						noquotes = true;
+					}
+					else if (OPTS[quote_style[i]]) {
+						optTemp = optTemp | OPTS[quote_style[i]]; 
+					}
+				}
+				quote_style = optTemp;
+			}
+			if (quote_style & OPTS.ENT_HTML_QUOTE_SINGLE) {        
+				string = string.replace(/'/g, '&#039;');
+			}
+			if (!noquotes) {
+				string = string.replace(/"/g, '&quot;');
+			} 
+			return string;
+		}
+		
+		function htmlspecialchars_decode(string)
+		{
+			return string.toString().replace(/&quot;/g , '"').replace(/&#039;/g , "'").replace(/&lt;/g , "<").replace(/&gt;/g , ">").replace(/&amp;/g , "&");
+		}
+		
+		//分页函数，
+		function drawPage(page , total  , maxpage){
+			//alert(page + "|" + total +"|"+ maxpage);
+			var page_pre = 2;
+			var show , pre ,start ;
+			var pageString ="<div class='grayr'>";
+			pre = Math.min(page_pre , page - page_pre);
+			show = Math.min(total , maxpage);
+			if(total - page < show - page_pre){
+				start = Math.max(total - show + 1 , 1);
+			}else{
+				start = Math.max(page - page_pre+1 , 1);
+			}
+			if(page > page_pre){
+				show = page_pre + Math.min(maxpage , total - page + 1);
+			}
+			show = Math.min(maxpage , total);
+			//var a = total-page+1;
+			if(page > 1){
+				pageString += '<a href="" class="pagenum" page = "'+ (page-1) +'" > < </a>';
+			}else{
+				pageString += '<span class="disabled"> &lt; </span>';
+			}
+			
+			for(var i = 0;i<show ; i++){
+				if( i+start != page){
+					pageString += "<a class='pagenum' page='"+ (i+start) +"' href=''>"+ (i+start)+ "</a>";//"</a><a href='#' class='pagenum' >"+ (i+start)+"</a>";
+				}else{
+					pageString += '<span class="current">'+ (i+start) +'</span>';
+				}
+			}
+			if(page < total){
+				
+				var nextpage = page;// + 1;
+				nextpage++;
+				pageString += '<a href="" class="pagenum" page = "'+ nextpage +'" > > </a>';
+			}else{
+				pageString += '<span class="disabled"> > </span>';
+			}
+			pageString += "</div>";
+			return pageString;
+		}
+		
+		function drawSchedulerTable(obj){
+			var data = obj.data.slice((obj.page-1)*obj.limit , obj.page*obj.limit);
+			if(data.length == 0){
+				
+			}else{
+				var tableArr = new Array();
+				var tablestart = "id ="+obj.tableId+" page = '"+ obj.page+"'";
+				tableArr.push(tableStart(tablestart));
+				tableArr.push("<caption>::: 计划任务 :::</caption> ");
+				tableArr.push("<tr><th>ID</th><th>任务名</th><th>类型</th><th>状态</th><th>下次运行时间</th><th>操作</th></tr>");
+				for(var i in data){
+					tableArr.push(trStart()+tdStart()+data[i]['JobId']+tdEnd()+tdStart()+data[i]['JobName']+tdEnd()+ tdStart()+data[i]['Type']+tdEnd() + tdStart()+data[i]['Status'] + tdEnd()+ tdStart()+data[i]['NextFireTime'] + tdEnd() + tdStart() + "<a class = 'button updateScheduler' ><span>更新</span></a><a class = 'button deleteScheduler' ><span>删除</span></a>" + tdEnd() +trEnd());
+				}
+				
+				if(obj.maxpage>1){
+					tableArr.push("<tr><td colspan='6'>" + drawPage(obj.page , obj.maxpage , 10) + "</td></tr>");
+				}
+				tableArr.push(tableEnd());
+				$(obj.area).html(tableArr.join("\n"));
+				
+				if(obj.maxpage>1){
+					$(obj.area+" .pagenum").die("click").live("click" , function(){
+						set_page(obj , $(this).attr("page"));
+						return false;
+					});
+				}
+				$(".updateScheduler").die("click").live("click" , function(){
+					var parentTd = $(this).parent();
+					var id = parentTd.siblings(0).html();
+					var cron = $("#cron").val("");
+					$("#floatform").css("left" , left+"px");
+					changeMuBu();
+					$("#floatform").css("top" , (gettop()+200)+"px");
+					$("#floatform").show();
+					$("#chedulersubmit").unbind("click").bind("click" , function(){
+						var cron = $("#cron").val();
+						if(cron == ""){
+							 alert("不得为空");
+							 return ;
+						}
+						var result = request({model:"scheduler",action:"update",jobid:id,cron:cron} , "POST" );
+						if(result.Status == '1'){
+							parentTd.parent().empty();
+							alert("OK");
+						}else{
+							alert(result.Tips);
+							return false;
+						}
+						
+					});
+					$("#chedulercancel").unbind("click").bind("click" , function(){
+						$("#floatform").hide();
+						changeMuBu();
+					});
+					
+				});
+				$(".deleteScheduler").click(function(){
+					var parentTd = $(this).parent();
+					if(!confirm("确实要删除"+parentTd.siblings().eq(1).html()+"吗?")){
+						return false;
+					}
+					var id = parentTd.siblings(0).html();
+					var result = request({model:"scheduler",action:"delete",jobid:id});
+					if(result.Status == '1'){
+						parentTd.parent().empty();
+					}else{
+						alert(result.Tips);
+						return false;
+					}
+				});
+			}
+		}
+		
+		function drawAboutTable(obj){
+			
+			//var data = obj.data.slice((obj.page-1)*obj.limit , obj.page*obj.limit);
+			var tableArr = new Array();
+			var tablestart = "id ="+obj.tableId+" page = '"+ obj.page+"'";
+			tableArr.push(tableStart(tablestart));
+			tableArr.push("<caption>::: 平台及扩展信息 :::</caption> ");
+			tableArr.push("<tr><th>平台版本</th><td>"+ obj.PlatFormShowVersion +"</td><th colspan='2'>平台文件版本</th><td colspan='2'>"+ obj.PlatFormInternalVersion +"</td></tr>");
+			tableArr.push("<tr><th>平台发布时间</th><td>"+ obj.PlatFormPublicDate +"</td><th colspan='2'>平台名称</th><td>"+ obj.PlatFormName +"</td></tr>");
+			tableArr.push("<tr><th>用户名</th><td>"+ obj.UserName +"</td><th colspan='2'>平台启动时间</th><td>"+ obj.StartTime +"</td></tr>");
+			tableArr.push("<tr><th>其他信息</th><td colspan='4'>"+ obj.ContactUsInfo +"</td></tr>");
+			
+			if(obj.total > 0){
+				//AppName":"火车采集器","VerifyVersion":"Free","FileVersion":"","Version":"7.0","CompanyName":""}]}
+				tableArr.push("<tr><th>扩展名</th><th>验证版本</th><th>文件版本</th><th>版本</th><th>开发商</th></tr>");
+				for(var i in obj.Data){
+					//alert(obj.Data[i].AppName);
+					tableArr.push(trStart()+tdStart()+obj.Data[i]['AppName']+tdEnd()+tdStart()+obj.Data[i]['VerifyVersion']+tdEnd()+ tdStart()+obj.Data[i]['FileVersion']+tdEnd()+ tdStart() + obj.Data[i]['Version'] + tdEnd() +tdStart() + obj.Data[i]['CompanyName'] + tdEnd() + trEnd());
+				}
+				tableArr.push(tableEnd());
+			}else{
+					
+			}
+			$(obj.area).html(tableArr.join("\n"));
+		}
+		
+		function getOperate(data){
+			//需要修改
+			if(data['JobStatus'] == '0'){	//空闲时
+				//return "<input type='button' class = 'start' value='开始' />";
+				return "<a class='button start'><span>开始</span></a>";
+			}else if(data['JobStatus'] == '1'){	//运行时
+				return "<a class='button pause'><span>暂停</span></a><a class='button stop'><span>停止</span></a>";
+				//return "<input type='button' class = 'pause' value='暂停' /><input type='button' class = 'stop' value='停止' />";
+			}else{	//暂停时
+				return "<a class='button start'><span>开始</span></a><a class='button stop'><span>停止</span></a>";
+				//return "<input type='button' class = 'start' value='开始' /><input type='button' class = 'stop' value='停止' />";
+			}
+		}
+		function set_page(obj , page){
+			if(page < 1 || page>obj.maxpage){
+				alert("页码错误");	
+				alert(page + "|" + obj.maxpage);
+				return false;
+			}
+			obj.page = page;
+			switch(obj.tableId)
+			{
+				case "rule":
+					drawTable(obj);
+					break;
+				case "scheduler":
+					drawSchedulerTable(obj);
+					break;
+				case "about":
+					drawAboutTable(obj);
+					break;
+				case "data":
+					drawDataTable(obj);
+					break;	
+				default:
+					alert("xx");	
+			}
+		}
+		
+
+		
+	function request(data , type , url){
+		if(!arguments[0]) data = {};
+		if(!arguments[1]) type = "GET";
+		if(!arguments[2]) url = api;
+  		if(typeof(args) != "undefined" && args != ""){
+			var argsArr = args.split("&");
+			for(var i in argsArr){
+				var keyValue = argsArr[i].split("=");
+				if(keyValue[0] == "user" || keyValue[0] == "pwd"){
+					data[keyValue[0]] = keyValue[1];
+				}
+			}
+		}
+		if(typeof(data.type) == "undefined"){
+			data.type="json";
+		}
+		
+		var result = $.ajax({
+		  type: type,
+		  data:data,
+		  url: url,
+		  async: false
+		 }).responseText;
+		 return strToObject(result);
+	}
+	
+	function strToObject(str){
+		try
+		{
+			var resultObj = typeof(JSON)=='undefined' ? eval("("+str+")") : JSON.parse(str);
+			if(typeof(resultObj) == "object"){
+				return resultObj;
+			}else{
+				alert(str);
+				return false;
+			}
+		}
+		catch (e)
+		{ 
+			alert(str);
+			return false;
+		}
+	}
+	
+	function fixUrl(url){
+		return typeof(args) == 'undefined' || args =="" ? url : url + "&" + args;			
+	}
+
+	//画出任务表格
+	function drawRuleTable(obj){
+		var start = (page-1)*limit;
+		var end = page*limit;
+		var total = data.length; //数据的总条数
+		var maxpage = Math.ceil(total/limit);
+		data = data.slice(start , end);
+
+		var tableArr = new Array();
+		tableArr.push(tableStart());
+		tableArr.push("<tr><th>ID</th><th>任务名</th><th>操作</th></tr>");
+		for(var i in data){
+			tableArr.push(trStart()+tdStart()+data[i]['Id']+tdEnd()+tdStart()+data[i]['Name']+tdEnd()+trEnd());
+		}
+		tableArr.push("<tr><td><input type='button' id='sy' value='上一页' /></td><td><input type='button' id='xy' value='下一页' /></td><td></td></tr>");
+		tableArr.push(tableEnd());
+		return tableArr.join("\n");
+	}
+
+	function gettop()
+	{
+		return document.body.scrollTop+document.documentElement.scrollTop;	
+	}
+
+	function trStart(str){
+		str = arguments[0] ? " "+arguments[0] : "";
+		return "<tr"+ str +">"
+	}
+
+	function trEnd(){
+		return "</tr>";
+	}
+
+	function tdStart(str){
+		str = arguments[0] ? " "+arguments[0] : "";
+		return "<td"+ str +">"
+	}
+
+	function tdEnd(){
+		return "</td>";
+	}
+
+	function tableStart(str){
+		str = arguments[0] ? " "+arguments[0] : "";
+		return "<table class ='dataintable'"+ str +">";
+	}
+
+	function tableEnd(){
+		return "</table>";
+	}
+	
+	function changeMuBu(){
+		if($("#mubu").is(":visible")){
+			$("#mubu").hide();
+			$("body").css("overflow" , 'auto');
+		}else{
+			$("body").css("overflow" , 'hidden');
+			var bH = Math.max($("body").height()+16  , screen.height);
+			var bW = $("body").width()+16;
+			$("#mubu").css({width:bW,height:bH}).show();
+		}
+	}
+	</script>
+
+ </head>
+
+ <body>
+<div id="mubu"></div>
+<div class="tb" id = "id1"></div>
+<div class="tb" id = "id2"></div>
+<div class="tb" id = "id3"></div>
+<div class="tb" id = "id4"></div>
+
+<div id="floatform" class="floatdiv">
+<h4>计划任务表达式</h2>
+<div >
+<form action="" name="scheduler" method="post">
+<span>cron表达式：</span><input id="cron" name="cron" type="text" size="50"  />
+<div class="buttonGroup">
+<a class="button floatcancel" id="chedulercancel" ><span>取消</span></a>
+<a class="button floatsubmit" id="chedulersubmit" ><span>提交</span></a>
+</div>
+</form>
+</div>
+</div>
+
+<div id="floatform2" class="floatdiv">
+<h4>规则文件</h2>
+<div >
+<form action="#" name="rule" method="post" enctype="multipart/form-data">
+<span>指定分组：</span><select id="group" name="siteid"></select><br />
+<input id="rulefile" name="rulefile" type="file" size="30"  /><span>(.ljobx)</span>
+
+<div class="buttonGroup">
+<a class="button floatcancel" id="rulecancel" ><span>取消</span></a>
+<a class="button floatsubmit" id="rulesubmit" ><span>提交</span></a>
+</div>
+</form>
+</div>
+</div>
+
+<div id="floatform3" class="floatdiv">
+    <h4>修改</h2>
+    <div>
+    	<div>
+        	<textarea id="edit" class="xheditor {tools:'Cut,Copy,Paste,Pastetext,|,Preview,Source,Fullscreen,About'}"></textarea>
+        </div>
+        <div class="buttonGroup">
+            <a class="button floatcancel"><span>取消</span></a>
+            <a class="button floatsubmit"><span>提交</span></a>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+</body>
+</html>

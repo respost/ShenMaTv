@@ -1,0 +1,7 @@
+<script language="javascript">
+	var win = window.external.menuArguments;
+	var a=win.location.href;
+	var wsh = new ActiveXObject("WScript.Shell");
+	var myExe= wsh.RegRead("HKEY_CURRENT_USER\\Software\\LewellTextRecognition\\path")+" ";
+	wsh.run(myExe+a);
+</script>

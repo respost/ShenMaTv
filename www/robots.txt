@@ -1,0 +1,3 @@
+User-agent: * 这里的*代表的所有的搜索引擎种类，*是一个通配符
+Disallow: /admin/
+Disallow: /user/

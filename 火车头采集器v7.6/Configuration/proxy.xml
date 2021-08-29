@@ -1,0 +1,51 @@
+<Proxy>
+  <ListenPort>6666</ListenPort>
+  <NetConnectName>
+  </NetConnectName>
+  <ValidateProxy2Url>http://www.baidu.com/</ValidateProxy2Url>
+  <ValidateProxy2RetrunString>&lt;title&gt;百度一下，你就知道</ValidateProxy2RetrunString>
+  <ValidateTimeOut>2</ValidateTimeOut>
+  <IsOrderOrRandomGetProxys>1</IsOrderOrRandomGetProxys>
+  <IsADSLReconnect>0</IsADSLReconnect>
+  <IsADSLReconnect_IntervalOrContainString>0</IsADSLReconnect_IntervalOrContainString>
+  <ReconnectIntervalMinute>90</ReconnectIntervalMinute>
+  <ReconnectIfContainString>
+  </ReconnectIfContainString>
+  <SampleProxySite>
+  </SampleProxySite>
+  <Level2Proxys>
+    <ProxyItem Type="0" IP="27.50.128.242" Port="88" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="59.46.72.245" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="60.221.253.204" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="61.174.9.96" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="106.3.40.249" Port="8081" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="106.37.177.251" Port="3128" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.3" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.5" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.21" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.23" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.24" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.25" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.26" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.27" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.133" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.163" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.165" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.36.166" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.1.60.210" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.161.126.83" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.161.126.89" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.161.126.91" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="111.161.126.92" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="112.95.241.76" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="112.253.6.182" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="113.57.230.83" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="113.57.252.104" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="113.57.252.105" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="113.57.252.107" Port="80" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="114.112.69.21" Port="81" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="115.29.166.133" Port="82" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="115.236.59.194" Port="3128" UserName="" PassWord="" Domain="" IsValidate="1" />
+    <ProxyItem Type="0" IP="116.236.216.116" Port="8080" UserName="" PassWord="" Domain="" IsValidate="1" />
+  </Level2Proxys>
+</Proxy>

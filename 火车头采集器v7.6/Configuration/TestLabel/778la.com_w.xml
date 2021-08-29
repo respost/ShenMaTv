@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <l name="标题" value="标题" />
+  <l name="缩略图" value="url" />
+  <l name="大图" value="pic" />
+  <l name="playurl" value="url" />
+  <l name="简介" value="url" />
+</root>

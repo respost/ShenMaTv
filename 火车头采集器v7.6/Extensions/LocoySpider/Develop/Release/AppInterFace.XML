@@ -1,0 +1,979 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AppInterFace</name>
+    </assembly>
+    <members>
+        <member name="T:LeWell.Api.AppFactory">
+            <summary>
+            AppFactory
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.AppFactory.CreateInterface(System.Type,System.String)">
+            <summary>
+            利用插件路径和接口类型动态加载插件中的功能类
+            </summary>
+            <param name="type"></param>
+            <param name="dllPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.AppFactory.CreateApp(System.String)">
+            <summary>
+            应用扩展接口
+            </summary>
+            <param name="dllPath">dll文件路径</param>
+            <returns>应用程序实例</returns>
+        </member>
+        <member name="M:LeWell.Api.AppFactory.CreateWebPost(System.String)">
+            <summary>
+            web在线发布模块接口
+            </summary>
+            <param name="dllPath">dll文件路径</param>
+            <returns>在线发布接口实例</returns>
+        </member>
+        <member name="M:LeWell.Api.AppFactory.CreateDatabase(System.String)">
+            <summary>
+            数据库入库接口
+            </summary>
+            <param name="dllPath">dll文件路径</param>
+            <returns>入库接口实例</returns>
+        </member>
+        <member name="M:LeWell.Api.AppFactory.CreateBBSCopier(System.String)">
+            <summary>
+            论坛采集器接口
+            </summary>
+            <param name="dllPath">dll文件路径</param>
+            <returns>论坛采集器接口实例</returns>
+        </member>
+        <member name="M:LeWell.Api.AppFactory.CreateSuperJob(System.String)">
+            <summary>
+            生成超级规则接口
+            </summary>
+            <param name="dllPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.AppFactory.CreateLocoySpider(System.String)">
+            <summary>
+            火车采集器
+            </summary>
+            <param name="dllPath">dll文件路径</param>
+            <returns>应用程序实例</returns>
+        </member>
+        <member name="T:LeWell.Api.ILocoySpider">
+            <summary>
+            火车采集器的插件
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.MakeStartAddress(System.String,System.String,System.String,System.Net.CookieCollection)">
+            <summary>
+            对起始网址进行处理，对一个网址可以返回多个网址。
+            </summary>
+            <param name="urlData"></param>
+            <param name="useragent"></param>
+            <param name="refer"></param>
+            <param name="cookie"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.ChangeStepRequest(System.Net.HttpWebRequest@)">
+            <summary>
+            在请求网址前更改http请求
+            </summary>
+            <param name="request"></param>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.ChangeStepHtml(System.String,System.String,System.Net.WebHeaderCollection,System.Net.WebHeaderCollection)">
+            <summary>
+            在网址http请求完成后处理html代码
+            </summary>
+            <param name="pageurl">当前页网址</param>
+            <param name="html">当前代码</param>
+            <param name="request">请求的header</param>
+            <param name="response">返回的header</param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.GetStepUrls(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            获取列表页地址和自定义标签
+            </summary>
+            <param name="html">网页源代码，是插件处理过的</param>
+            <param name="areaStart">网址提取区域开始</param>
+            <param name="areaEnd">网址提取区域结束</param>
+            <param name="urlStyle">自定义网址规则样式</param>
+            <param name="urlCombine">自定义组合网址</param>
+            <param name="allow">网址中包含</param>
+            <param name="forbidden">网址中不得包含</param>
+            <returns>一个网址，对应的dic是标签</returns>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.ChangeResultDic(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            对最终采集的结果字符串进行再处理
+            </summary>
+            <param name="dic"></param>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.ChangeSaveFiles(System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.KeyValuePair{System.String,System.String}}},System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            对还没有下载前的文件进行修改，分别是标签名，文件保存和要替换的地址
+            </summary>
+            <param name="fieldandfiles">标签名，所有文件，下载地址，文件保存地址和替换地址</param>
+            <param name="dic">标签名和html值</param>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.EndJob(System.Boolean,System.String,System.String,System.Int32,System.Int32,System.Int32,System.Object)">
+            <summary>
+            任务完成后做什么
+            </summary>
+            <param name="handstop">是否手动停止</param>
+            <param name="jobname">任务名</param>
+            <param name="jobid">任务id</param>
+            <param name="url">采网址成功条数</param>
+            <param name="content">采内容成功条数</param>
+            <param name="post">发内容成功条数</param>
+            <param name="job">任务的变量</param>
+            <returns>需要在界面上显示的字,null或空不显示</returns>
+        </member>
+        <member name="M:LeWell.Api.ILocoySpider.StartJob">
+            <summary>
+            运行任务时的操作
+            </summary>
+            <returns>需要在界面上显示的字,null或空不显示</returns>
+        </member>
+        <member name="P:LeWell.Api.ILocoySpider.UseMakeStartAddress">
+            <summary>
+            是否处理起始网址
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.ILocoySpider.UseGetStepUrls">
+            <summary>
+            是否使用获取网址
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.ILocoySpider.UseChangeSaveFiles">
+            <summary>
+            是否启用修改保存文件
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.IWebPost">
+            <summary>
+            web在线发布接口
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IWebPost.Login(System.String,System.String,System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String[],System.String[],System.String@,System.Net.CookieCollection)">
+            <summary>
+            登陆网站
+            </summary>
+            <param name="loginUrl">登陆地址</param>
+            <param name="loginRefer">来源页面</param>
+            <param name="user_agent">user-agent</param>
+            <param name="loginImgUrl">验证码地址</param>
+            <param name="dicPost">登陆post数据</param>
+            <param name="failInfos">失败信息，可能为null</param>
+            <param name="sucessInfos">成功信息，可能为null</param>
+            <param name="errorHtml">登陆失败后的html信息</param>
+            <param name="cookies">登陆成功后返回的cookie</param>
+            <returns>是否成功登陆</returns>
+        </member>
+        <member name="M:LeWell.Api.IWebPost.GetList(System.String,System.String,System.String,System.Net.CookieCollection,System.String,System.String,System.String,System.String@)">
+            <summary>
+            刷新列表
+            </summary>
+            <param name="refreshUrl">刷新列表页面</param>
+            <param name="refreshRefer">来源页面</param>
+            <param name="user_agent">user-agent</param>
+            <param name="cookies">访问需要的cookie</param>
+            <param name="refreshStart">页面开始区域</param>
+            <param name="refreshEnd">页面区域结束</param>
+            <param name="refreshRegex">分类列表名称及id格式</param>
+            <param name="html">返回的html代码</param>
+            <returns>字典，为分类id,分类名称</returns>
+        </member>
+        <member name="M:LeWell.Api.IWebPost.GetFormHash(System.String,System.String,System.String,System.Net.CookieCollection,System.String,System.String,System.String@)">
+            <summary>
+            获取随机值
+            </summary>
+            <param name="hashUrl">随机值获取页面</param>
+            <param name="hashRefer">来源</param>
+            <param name="user_agent">user-agent</param>
+            <param name="cookies">网站cookie</param>
+            <param name="hashStart">随机值前字符串</param>
+            <param name="hashEnd">随机值后字符串</param>
+            <param name="result"></param>
+            <returns>成功否</returns>
+        </member>
+        <member name="M:LeWell.Api.IWebPost.Post(System.String,System.String,System.String,System.Net.CookieCollection,System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Collections.Generic.Dictionary{System.String,System.Collections.Generic.List{System.String}},System.String[],System.String[],System.String@,System.String@,System.String@)">
+            <summary>
+            发布文章
+            </summary>
+            <param name="PostUrl">发表地址</param>
+            <param name="PostRefer">来源页</param>
+            <param name="user_agent">user-agent</param>
+            <param name="cookies">cookie</param>
+            <param name="dic">发布的字典值</param>
+            <param name="uploadFiles">上传文件信息</param>
+            <param name="failInfos">失败标识码</param>
+            <param name="sucessInfos">成功标识码</param>
+            <param name="error">出错信息，因为可能是几个线程同时发的，所以不用单个实例的出错信息</param>
+            <param name="sucess">成功标识码</param>
+            <param name="html">返回的html代码</param>
+            <returns>是否发布成功</returns>
+        </member>
+        <member name="P:LeWell.Api.IWebPost.Error">
+            <summary>
+            bool方法出错后的提示信息
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IWebPost.UseLogin">
+            <summary>
+            是否启用登陆网站
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IWebPost.UseGetList">
+            <summary>
+            是否启用获取列表
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IWebPost.UseGetFormHash">
+            <summary>
+            是否启用获取随机值,这个对所有的都有用
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IWebPost.UsePost">
+            <summary>
+            是否启用发布数据
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.JobStep">
+            <summary>
+            任务的当前步骤，采网址，采内容，发内容
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStep.SpiderUrl">
+            <summary>
+            采网址
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStep.SpiderContent">
+            <summary>
+            采内容
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStep.OutContent">
+            <summary>
+            发内容
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.JobStatus">
+            <summary>
+            任务的状态，运行，暂停，停止
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStatus.Idle">
+            <summary>
+            运行和就绪等待中 均为该状态
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStatus.Running">
+            <summary>
+            运行中
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStatus.Pause">
+            <summary>
+            暂停
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.JobStatusEventArgs">
+            <summary>
+            状态改变情况 运行+启动时间 就绪+DateTime.MinValue 暂停+停止时间 停止+停止时间
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStatusEventArgs.JobId">
+            <summary>
+            任务ID
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStatusEventArgs.CurrentStatus">
+            <summary>
+            当前状态
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobStatusEventArgs.CurrentTime">
+            <summary>
+            当前时间
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.JobStatusEventArgs.#ctor(System.String,LeWell.Api.JobStatus,System.DateTime)">
+            <summary>
+            状态改变情况 运行+启动时间 就绪+DateTime.MinValue 暂停+停止时间 停止+停止时间
+            </summary>
+            <param name="jobid"></param>
+            <param name="currentstatus"></param>
+            <param name="currenttime"></param>
+        </member>
+        <member name="T:LeWell.Api.JobRunStatEventArgs">
+            <summary>
+            任务运行数量改变情况
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobRunStatEventArgs.JobId">
+            <summary>
+            任务ID
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobRunStatEventArgs.CurrentStep">
+            <summary>
+            当前步骤
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobRunStatEventArgs.SuccessNum">
+            <summary>
+            当前步骤运行中成功增加的数量
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobRunStatEventArgs.FailNum">
+            <summary>
+            当前步骤运行中失败增加的数量
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobRunStatEventArgs.RepeatNum">
+            <summary>
+            当前步骤运行中重复增加的数量
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.JobRunStatEventArgs.TotalNum">
+            <summary>
+            当前步骤总的数量
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.JobRunStatEventArgs.#ctor(System.String,LeWell.Api.JobStep,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            如果为-1 则不是该项。
+            </summary>
+            <param name="jobid">任务ID</param>
+            <param name="currentstep">当前步骤</param>
+            <param name="successnum">成功数</param>
+            <param name="failnum">失败数</param>
+            <param name="repeatnum">重复数</param>
+            <param name="totalnum">总素</param>
+        </member>
+        <member name="T:LeWell.Api.IApp">
+            <summary>
+            AppInterFace
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IApp.NewSiteGroup(System.String@,System.String@,System.Int32@,System.String)">
+            <summary>
+            创建新站点/分组
+            </summary>
+            <param name="siteName"></param>
+            <param name="siteXml"></param>
+            <param name="imageIndex"></param>
+            <param name="parentSiteXml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.NewJob(System.String@,System.String@,System.String)">
+            <summary>
+            创建新任务
+            </summary>
+            <param name="jobName"></param>
+            <param name="jobXml"></param>
+            <param name="parentSiteXml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.EditSiteGroup(System.String@,System.String@,System.Int32@)">
+            <summary>
+            编辑站点/分组
+            </summary>
+            <param name="siteName"></param>
+            <param name="siteXml"></param>
+            <param name="imageIndex"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.EditJob(System.String@,System.String@)">
+            <summary>
+            编辑任务
+            </summary>
+            <param name="jobName"></param>
+            <param name="jobXml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.PasteJob(System.String@,System.String@,System.String,System.Boolean)">
+            <summary>
+             粘贴任务
+            </summary>
+            <param name="copyJobName"></param>
+            <param name="copyJobXml"></param>
+            <param name="parentSiteXml"></param>
+            <param name="isCopyPreJobData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.DeleteSiteGroup(System.String)">
+            <summary>
+            删除站点/分组
+            </summary>
+            <param name="siteXml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.DeleteJob(System.String)">
+            <summary>
+            删除任务(删除到任务回收站)
+            </summary>
+            <param name="jobXml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.CancelDelete(System.String)">
+            <summary>
+            取消删除任务，从任务回收站重新移出任务到分组。
+            </summary>
+            <param name="jobXml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.DeleteSiteGroupAsk(System.String,System.String,System.Int32)">
+            <summary>
+            删除站点/分组前的提问，null为使用默认
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IApp.DeleteJobAsk(System.String,System.String)">
+            <summary>
+            删除任务前的提问，null为使用默认
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IApp.ExportJob(System.String)">
+            <summary>
+            导出任务时传出的文件地址
+            </summary>
+            <param name="jobXml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.ImportJob(System.String@,System.String@,System.Collections.Generic.List{System.String})">
+            <summary>
+            导入任务时的处理
+            </summary>
+            <param name="jobXml"></param>
+            <param name="jobname">任务名</param>
+            <param name="files">传入的文件</param>
+        </member>
+        <member name="M:LeWell.Api.IApp.EditJobData(Lv.Docking.DockPanel,System.String)">
+            <summary>
+            编辑本地采集数据
+            </summary>
+            <param name="dockPanel"></param>
+            <param name="jobXml"></param>
+        </member>
+        <member name="M:LeWell.Api.IApp.TruncatelJobData(System.String,System.String)">
+            <summary>
+            清本本地所有采集数据
+            </summary>
+            <param name="jobName"></param>
+            <param name="jobXml"></param>
+        </member>
+        <member name="M:LeWell.Api.IApp.DataSwitching(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Object)">
+            <summary>
+            数据交换
+            </summary>
+            <param name="jobid">平台的任务id</param>
+            <param name="dic"></param>
+            <param name="o">对像</param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.GetSpider(Lv.Docking.DockPanel,System.String,System.String,System.String)">
+            <summary>
+             执行采集任务的采集器
+             </summary>
+             <param name="dockPanel">运行任务的窗口，null可能为服务方式启动</param>
+             <param name="jobid"></param>
+             <param name="jobName"></param>
+             <param name="jobXml">任务参数</param>
+             <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.ExitApp">
+            <summary>
+            退出整个程序时需要做的
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IApp.Verify(System.String,System.String,System.String@)">
+            <summary>
+            框架向应用程序传入验证信息
+            </summary>
+            <param name="verifyVersion">验证得到的版本号</param>
+            <param name="verifyVersionCHS">验证得到的中文版本号</param>
+            <param name="errorString">验证错误false时返回的验证错误信息。</param>
+        </member>
+        <member name="M:LeWell.Api.IApp.BatchJobWork(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            批量对任务进行修改
+            </summary>
+            <param name="jobxmls">任务xml数据</param>
+        </member>
+        <member name="M:LeWell.Api.IApp.GetSpiderData(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取本地采集数据
+            </summary>
+            <param name="jobid">任务id</param>
+            <param name="pageindex">分页索引</param>
+            <param name="pagesize">一页的数据量</param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.GetCountSpiderData(System.String,System.Int32)">
+            <summary>
+            统计数据量
+            </summary>
+            <param name="jobid">任务id</param>
+            <param name="opreator">0为所有,1为已采集，2为未采集，3为已发布，4为未发布</param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.UpdateSpiderData(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            更新数据
+            </summary>
+            <param name="jobid">任务id</param>
+            <param name="id">记录id</param>
+            <param name="dic">字典对</param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.DeleteSpiderData(System.String,System.String)">
+            <summary>
+            任务中记录删除
+            </summary>
+            <param name="jobid">任务id</param>
+            <param name="ids">要删除的记录id,多个间以,分开</param>
+            <returns>null为成功</returns>
+        </member>
+        <member name="M:LeWell.Api.IApp.LoadStaticOemInfo">
+            <summary>
+            在扩展成功加载后 加载静态OEM信息
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IApp.MethodPrepare">
+            <summary>
+            预留方法
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.AppName">
+            <summary>
+            应用程序名称
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.AppEnglish">
+            <summary>
+            软件英文名
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.AppVersion">
+            <summary>
+            应用程序版本
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.WelcomeForm">
+            <summary>
+            欢迎页
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.JobTreeAppImage11X11">
+            <summary>
+            任务列表树显示的任务图标大小为11*11
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.AppIco">
+            <summary>
+            扩展软件图标
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.ExtensionMenu">
+            <summary>
+            扩展菜单，可以使用多级，显示在 扩展 菜单下
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.JobOperateMenu">
+            <summary>
+            扩展菜单，显示在任务列表树的任务操作一栏
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.DataOperateMenu">
+            <summary>
+            扩展菜单，显示在任务列表树的任务数据处理一栏
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.JobFileExt">
+            <summary>
+            导出任务的文件后缀
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.UseDefaultUI">
+            <summary>
+            是否使用采集器默认的ui
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.Error">
+            <summary>
+            最后一个出错信息
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.UseDataSwitching">
+            <summary>
+            是否使用数据交换
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.VerifyVersion">
+            <summary>
+            验证得到的版本号
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.VerifyVersionCHS">
+            <summary>
+            验证得到的中文版本号
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.IsSinglyApp">
+            <summary>
+            是否是独占扩展（一个平台下只能使用一个该扩展）
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.AppJobSiteStatus">
+            <summary>
+            扩展保存分组及任务时的状态数字，普通扩展均设置为1，独占扩展使用大于等于2并且小于等于127的唯一一个任意数字。 当Status为0时，则为普通扩展的禁用任务，当Status大于127，小于255时，独占扩展为禁用状态，其值应为255减去 独占扩展的正常Status值。
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.VarDicPrepare">
+            <summary>
+            预留值字符串数组
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IApp.VarIntPrepare">
+            <summary>
+            预留值整数
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.SetStepText">
+            <summary>
+            设置运行步骤 采网址 采内容 发内容
+            </summary>
+            <param name="jobid"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.SetProcessBar">
+            <summary>
+            设置进度条信息
+            </summary>
+            <param name="jobid"></param>
+            <param name="max"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:LeWell.Api.SetStatusText">
+            <summary>
+            设置状态栏文字
+            </summary>
+            <param name="jobid"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.SetResultSucess">
+            <summary>
+            设置成功结果信息
+            </summary>
+            <param name="jobid"></param>
+            <param name="jobstep"></param>
+            <param name="url"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.SetResultFail">
+            <summary>
+            设置失败结果信息
+            </summary>
+            <param name="jobid"></param>
+            <param name="jobstep"></param>
+            <param name="url"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.SetResultRepeat">
+            <summary>
+            设置重复结果信息
+            </summary>
+            <param name="jobid"></param>
+            <param name="jobstep"></param>
+            <param name="url"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.JobStepStartStat">
+            <summary>
+            任务运行步骤统计
+            </summary>
+            <param name="jobid"></param>
+            <param name="jobstep"></param>
+            <param name="count"></param>
+        </member>
+        <member name="T:LeWell.Api.SetInformation">
+            <summary>
+            设置提示信息
+            </summary>
+            <param name="jobid"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.JobRunNotice">
+            <summary>
+            任务运行提示
+            </summary>
+            <param name="jobid"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.JobEndNotice">
+            <summary>
+            任务结束提示
+            </summary>
+            <param name="jobid"></param>
+            <param name="text"></param>
+            <param name="ismanualstop"></param>
+        </member>
+        <member name="T:LeWell.Api.JobPauseNotice">
+            <summary>
+            任务暂停提示
+            </summary>
+            <param name="jobid"></param>
+            <param name="text"></param>
+        </member>
+        <member name="T:LeWell.Api.ISpider">
+            <summary>
+            采集器 公共接口
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.ISpider.CheckSpider(System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            检查任务是否正确
+            </summary>
+            <param name="spiderUrl">采网址</param>
+            <param name="spiderContent">采内容</param>
+            <param name="publishContent">发内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.ISpider.Start">
+            <summary>
+            开始执行任务
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.ISpider.PauseJob">
+            <summary>
+            暂停任务
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.ISpider.ContinueJob">
+            <summary>
+            继续任务
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.ISpider.StopJob">
+            <summary>
+            停止任务
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.ISpider.GetJobStatus">
+            <summary>
+            得到任务当前状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.ISpider.DisposeGui">
+            <summary>
+            关闭运行界面
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.ISpider.GetJobStep">
+            <summary>
+            得到任务当前运行步骤
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LeWell.Api.ISpider.SetDownloadManager(Lv.ChunkedDownload.Core.DownloadManager)">
+            <summary>
+            设置文件下载器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="E:LeWell.Api.ISpider.SetProcessBarEventHandler">
+            <summary>
+            设置进度条状态
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.SetStepTextEventHandler">
+            <summary>
+            设置步骤文本信息
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.SetStatusTextEventHandler">
+            <summary>
+            设置当前运行状态
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.JobEndNoticeEventHandler">
+            <summary>
+            任务结束时通知
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.JobPauseNoticeEventHandler">
+            <summary>
+            任务暂停时通知
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.JobRunNoticeEventHandler">
+            <summary>
+            任务运行时通知
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.SetResultSucessEventHandler">
+            <summary>
+            当任务记录运行成功时通知
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.SetResultFailEventHandler">
+            <summary>
+            当任务记录运行失败时通知
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.SetResultRepeatEventHandler">
+            <summary>
+            当任务记录运行重复时通知
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.JobStepStartStatEventHandler">
+            <summary>
+            任务某个步骤开始时发送总的要处理的记录数
+            </summary>
+        </member>
+        <member name="E:LeWell.Api.ISpider.SetInformationEventHandler">
+            <summary>
+            发送普通的记录信息
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.DatabaseType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.DatabaseType.Access">
+            <summary>
+            access数据库
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.DatabaseType.MySql">
+            <summary>
+            mysql数据库
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.DatabaseType.SqlServer">
+            <summary>
+            sqlserver数据库
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.DatabaseType.Sqlite">
+            <summary>
+            sqlite数据库
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.DatabaseType.MongoDb">
+            <summary>
+            mogodb数据库
+            </summary>
+        </member>
+        <member name="F:LeWell.Api.DatabaseType.Oracle">
+            <summary>
+            oracle数据库
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.IDatabase">
+            <summary>
+            数据库入库接口，因为入库这块比较简单，所以接口是接管了所有的数据处理
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IDatabase.Import(System.Collections.Generic.Dictionary{System.String,System.String},System.String@)">
+            <summary>
+            导入数据
+            </summary>
+            <param name="data">键值对的数据</param>
+            <param name="error">错误信息</param>
+            <returns>是否入库成功</returns>
+        </member>
+        <member name="P:LeWell.Api.IDatabase.DatabaseType">
+            <summary>
+            数据库类型
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IDatabase.ConnectStr">
+            <summary>
+            数据库链接字符串
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IDatabase.DatabasePrefix">
+            <summary>
+            数据库表前缀
+            </summary>
+        </member>
+        <member name="P:LeWell.Api.IDatabase.ModuleData">
+            <summary>
+            入库模块中的字符串
+            </summary>
+        </member>
+        <member name="T:LeWell.Api.IBBSCopier">
+            <summary>
+            BBSCopier
+            </summary>
+        </member>
+        <member name="M:LeWell.Api.IBBSCopier.MakeFidUrl(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            //重新设置那个栏目网址
+            </summary>
+            <param name="fidurl">程序生成的版块列表页地址</param>
+            <param name="TrueFidUrlRegex">版块列表页正则,对应规则中的"版块分类->版块真实地址组合"</param>
+            <param name="SourceId">源版块Id,对应任务中"源论坛id"</param>
+            <param name="Page">对应转移页数据页码</param>
+            <returns>新的列表页地址,如不操作,返回fidurl即可</returns>
+        </member>
+        <member name="M:LeWell.Api.IBBSCopier.FidHtml(System.String,System.String)">
+            <summary>
+            处理列表页代码
+            </summary>
+            <param name="fidUrl">版块列表页地址</param>
+            <param name="Html">版块列表页所下载的源码</param>
+            <returns>处理过的列表页源码,如不操作直接返回Html即可</returns>
+        </member>
+        <member name="M:LeWell.Api.IBBSCopier.MakeTidUrl(System.String,System.String@,System.Net.CookieCollection,System.String)">
+            <summary>
+            对内容页的地址进行重新处理
+            </summary>
+            <param name="tidurl">程序生成的内容页地址</param>
+            <param name="listpageurl">内容页网址正则,对应规则中的"网址列表->网址格式"</param>
+            <param name="cookie">Cookie</param>
+            <param name="useragent">浏览器User-agent</param>
+            <returns>新的帖子地址,如不操作返回 tidurl即可</returns>
+        </member>
+        <member name="M:LeWell.Api.IBBSCopier.TidHtml(System.String,System.String)">
+            <summary>
+            对内容页的源码进行处理
+            </summary>
+            <param name="tidUrl">内容页地址</param>
+            <param name="Html">内容页源码</param>
+            <returns>处理过的内容页源码,如不操作直接返回Html即可</returns>
+        </member>
+        <member name="M:LeWell.Api.IBBSCopier.FloorArea(System.String,System.String,System.Net.CookieCollection,System.String)">
+            <summary>
+            对楼层数据进行处理
+            </summary>
+            <param name="areahtml">当前楼层中的源代码</param>
+            <param name="pageurl">当前楼层所在页码地址</param>
+            <param name="cookie">网站Cookie</param>
+            <param name="useragent">浏览器User-agent</param>
+            <returns>新的楼层源码.如不操作直接返回areahtml即可</returns>
+        </member>
+        <member name="M:LeWell.Api.IBBSCopier.BeforeSave(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            对标签数据进行处理
+            </summary>
+            <param name="dic">保存数据的字典,如标题,内容,键值为对应的值</param>
+            <returns>新的处理过的数据,如不操作,直接返回dic即可</returns>
+        </member>
+        <member name="M:LeWell.Api.IBBSCopier.GetAttachUrl(System.String,System.Net.CookieCollection,System.String,System.String)">
+            <summary>
+            得到下载地址,如果返回是本地地址,则代表已下载
+            </summary>
+            <param name="fileurl">采集器提取到的下载地址</param>
+            <param name="cc">Cookie</param>
+            <param name="useragent">User-Agent</param>
+            <param name="refurl">引用页地址</param>
+            <returns>新的下载地址,如不操作,返回fileurl即可</returns>
+        </member>
+    </members>
+</doc>

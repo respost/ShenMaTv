@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Created by LeWellOCR.vshost.exe! 2011-03-08 15:49:18-->
+<config>
+  <全局>
+    <地址>http://agenow.com/ValidateNumber.aspx</地址>
+    <放大倍数>5</放大倍数>
+    <显示网格>False</显示网格>
+    <白名单字符>0123456789</白名单字符>
+    <黑名单字符>
+    </黑名单字符>
+    <中文>False</中文>
+    <高级设置>False</高级设置>
+    <请求地址>
+    </请求地址>
+    <请求来源>
+    </请求来源>
+    <请求前>
+    </请求前>
+    <请求后>
+    </请求后>
+  </全局>
+  <滤镜>
+    <lv.ocr.clearnoise.cnclearborder>1|1|1|1</lv.ocr.clearnoise.cnclearborder>
+    <lv.ocr.clearnoise.cnbrightnesscontrast>0|23</lv.ocr.clearnoise.cnbrightnesscontrast>
+  </滤镜>
+</config>
